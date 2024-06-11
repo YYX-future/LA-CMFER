@@ -129,8 +129,8 @@ def get_cluster_loss(out1, out2, label, pred, mask_src, mask_tgt):
     # pred = pred.data.max(1)[1]
     label_set = []
     loss = 0
-    intra_loss = 0
-    inter_loss = 0
+    intra_dis = 0
+    inter_dis = 0
     num_intra = 0
     num_inter = 0
     for i in range(0, label.shape[0]):
@@ -149,7 +149,7 @@ def get_cluster_loss(out1, out2, label, pred, mask_src, mask_tgt):
             index = equal_tgt.nonzero(as_tuple=False)
             index = index.squeeze(dim=1)
             data_tgt = out2[index]
-            intra_loss += mmd_loss(data_src, data_tgt)
+            intra_dis += mmd_loss(data_src, data_tgt)
 
     for i in range(0, len(label_set)):
         for j in range(0, len(label_set)):
@@ -164,10 +164,10 @@ def get_cluster_loss(out1, out2, label, pred, mask_src, mask_tgt):
                     index = equal_tgt.nonzero(as_tuple=False)
                     index = index.squeeze(dim=1)
                     data_tgt = out2[index]
-                    inter_loss += mmd_loss(data_src, data_tgt)
+                    inter_dis += mmd_loss(data_src, data_tgt)
 
     if num_inter != 0 and num_intra != 0:
-        loss += intra_loss / num_intra - (inter_loss / num_inter)
+        loss += intra_dis / num_intra - (inter_dis / num_inter)
     return loss
 
 
