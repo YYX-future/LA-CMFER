@@ -2,4 +2,4 @@
 The official pytorch implementation for paper "Learning with Alignments: Tackling the Inter- and Intra-domain Shifts for Cross-multidomain Facial Expression Recognition"
 
 # Acknowledgement
-Some codes and hyper-parameters are borrowed from [DUML]([url](https://github.com/liuhw01/DUML)).
+Some codes and hyper-parameters are borrowed from [DUML](lhttps://github.com/liuhw01/DUML).
