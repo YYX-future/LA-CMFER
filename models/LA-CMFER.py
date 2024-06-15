@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch
 import loss.smooth_cls_1 as smooth_cls
 from loss.mmd_1 import mmd, mmd_loss, get_weight, get_cluster_loss
-from loss.intra_1 import contras_cls
+from loss.intra_1 import mcc_loss
 from pseudo.pseudo import get_ps_label_acc, select_pseudo_labels
 from fightingcv_attention.attention.CBAM import CBAMBlock
 
@@ -246,7 +246,7 @@ class MDAEFR(nn.Module):
         # Domain-shared
         self.sharedNet = resnet18(True)
         # global features
-        self.addnetlist_g = ADDNET(AttentionBlock)
+        self.addnetlist_g = ADDNET(AttentionBlock)  # follow duml
         self.cls_g = nn.Linear(self.gfeat, self.num_classes)
         # local fine-grained features
         self.addnetlist_l = CropNet(AttentionBlock)
@@ -283,7 +283,7 @@ class MDAEFR(nn.Module):
             tgt_l, ps_acc_t = select_pseudo_labels(tgt_pre_g, tgt_pre_l, args.ps_threshold, tgt_label)
 
             if args.intra:
-                intra += contras_cls(tgt_pre_g, tgt_pre_l)
+                intra += mcc_loss(tgt_pre_g, tgt_pre_l)
 
             # if args.l1:
             #     intra += F.l1_loss(tgt_pre_g, tgt_pre_l)
