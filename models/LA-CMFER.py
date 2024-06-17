@@ -3,6 +3,7 @@ import math
 import torch.nn.functional as F
 import torch
 import loss.smooth_cls_1 as smooth_cls
+
 from loss.mmd_1 import mmd, mmd_loss, get_weight, get_cluster_loss
 from loss.intra_1 import mcc_loss
 from pseudo.pseudo import get_ps_label_acc, select_pseudo_labels
@@ -79,6 +80,7 @@ class ResNet(nn.Module):
         self.fc = nn.Linear(512 * block.expansion, num_classes)
         self.dropout = nn.Dropout(p=0.3)
 
+        # 　权值参数初始化
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
@@ -246,7 +248,7 @@ class MDAEFR(nn.Module):
         # Domain-shared
         self.sharedNet = resnet18(True)
         # global features
-        self.addnetlist_g = ADDNET(AttentionBlock)  # follow duml
+        self.addnetlist_g = ADDNET(AttentionBlock)
         self.cls_g = nn.Linear(self.gfeat, self.num_classes)
         # local fine-grained features
         self.addnetlist_l = CropNet(AttentionBlock)
@@ -285,19 +287,19 @@ class MDAEFR(nn.Module):
             if args.intra:
                 intra += mcc_loss(tgt_pre_g, tgt_pre_l)
 
-            # if args.l1:
-            #     intra += F.l1_loss(tgt_pre_g, tgt_pre_l)
-            #
-            # if args.mse:
-            #     intra += F.mse_loss(tgt_pre_g, tgt_pre_l)
-            #
-            # if args.kl:
-            #     pred1_log_softmax = F.log_softmax(tgt_pre_g, dim=1)
-            #     pred2_softmax = F.softmax(tgt_pre_l, dim=1)
-            #     intra += 0.5 * F.kl_div(pred1_log_softmax, pred2_softmax, reduction='batchmean')
-            #     pred2_log_softmax = F.log_softmax(tgt_pre_l, dim=1)
-            #     pred1_softmax = F.softmax(tgt_pre_g, dim=1)
-            #     intra += 0.5 * F.kl_div(pred2_log_softmax, pred1_softmax, reduction='batchmean')
+            if args.l1:
+                intra += F.l1_loss(tgt_pre_g, tgt_pre_l)
+
+            if args.mse:
+                intra += F.mse_loss(tgt_pre_g, tgt_pre_l)
+
+            if args.kl:
+                pred1_log_softmax = F.log_softmax(tgt_pre_g, dim=1)
+                pred2_softmax = F.softmax(tgt_pre_l, dim=1)
+                intra += 0.5 * F.kl_div(pred1_log_softmax, pred2_softmax, reduction='batchmean')
+                pred2_log_softmax = F.log_softmax(tgt_pre_l, dim=1)
+                pred1_softmax = F.softmax(tgt_pre_g, dim=1)
+                intra += 0.5 * F.kl_div(pred2_log_softmax, pred1_softmax, reduction='batchmean')
 
             if args.global_inter_sample:
 
