@@ -20,7 +20,7 @@ device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 def get_parse_option():
     parser = argparse.ArgumentParser('training and evaluation script', add_help=False)
 
-    parser.add_argument('--seed', type=int, default=3407)
+    parser.add_argument('--seed', type=int, default=10)  # 3407
     parser.add_argument('--devices', type=str, default='0', help='Set the CUDA_VISIBLE_DEVICES var from this string')
 
 
