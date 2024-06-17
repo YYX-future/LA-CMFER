@@ -1,7 +1,10 @@
 import torch
 
+def sharpen(p, T = 0.25):
+    u = p ** (1/T)
+    return u / u.sum(dim=1, keepdim=True)
 
-def contras_cls(p1, p2):
+def mcc_loss(p1, p2):
     N, C = p1.shape
     cov = p1.t() @ p2
 
@@ -10,8 +13,3 @@ def contras_cls(p1, p2):
     loss = 0.5 * (torch.sum(cov_norm1) - torch.trace(cov_norm1)) / C \
         + 0.5 * (torch.sum(cov_norm2) - torch.trace(cov_norm2)) / C
     return loss
-
-
-def sharpen(p, T = 0.25):
-    u = p ** (1/T)
-    return u / u.sum(dim=1, keepdim=True)
