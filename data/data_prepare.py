@@ -2,14 +2,13 @@ import os
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 from torchvision import transforms
-from torch.utils.data import DataLoader
 import bisect
-import warnings
+
 
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
 
-# 参照对比论文里面的数据增强策略
+# follow duml
 train_transform = transforms.Compose([transforms.Resize([224, 224]),
                                       transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
                                       transforms.RandomGrayscale(p=0.2),
@@ -75,7 +74,7 @@ class TestDataset(Dataset):
         self.data = data
         self.transform = transform
 
-    def __getitem__(self, index):  # 返回tensor，标签
+    def __getitem__(self, index):
         fn, label = self.data[index]
         img = Image.open(fn).convert('RGB')
 
@@ -118,18 +117,16 @@ class ConcatDataset(Dataset):
 
 def load_training(root_path, source_paths, batch_size, transform_type=None, ensemble_source=False):
 
-    # 会出现1-6个源域的情况
     if ensemble_source:
         source_paths = [os.path.join(root_path, path) for path in source_paths if path is not None]
     else:
         source_paths = os.path.join(root_path, source_paths)
 
-    # 创建 TrainDataset 实例，传递源域列表作为参数
     train_data = TrainDataset(source_paths, transform_type, ensemble_source)
 
     # 创建 DataLoader
     train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=True, drop_last=True,
-                              pin_memory=True, num_workers=2)  # sampler和shuffle不能同时为真
+                              pin_memory=True, num_workers=2)
 
     return train_loader
 
@@ -146,13 +143,11 @@ def load_testing(root_path, txt_path, batch_size):
 
 def load_training_dataset(root_path, source_paths, batch_size, transform_type=None, ensemble_source=False):
 
-    # 会出现1-6个源域的情况
     if ensemble_source:
         source_paths = [os.path.join(root_path, path) for path in source_paths if path is not None]
     else:
         source_paths = os.path.join(root_path, source_paths)
 
-    # 创建 TrainDataset 实例，传递源域列表作为参数
     train_data = TrainDataset(source_paths, transform_type, ensemble_source)
 
     return train_data
