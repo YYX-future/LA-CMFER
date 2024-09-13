@@ -53,4 +53,4 @@ If this work is helpful for your research, please consider citing the following 
 }
 ```
 ## Contact
-If you have any questions or suggestions, feel free to email [Yuxiang Yang](winscuer@gmail.com).
+If you have any questions or suggestions, feel free to email [Yuxiang Yang](yangyuxiang3@stu.scu.edu.cn).
