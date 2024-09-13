@@ -3,7 +3,7 @@
 
 [**Yuxiang Yang**](https://scholar.google.com/citations?user=uyiHu0kAAAAJ&hl=en)<sup>1†</sup> · **Lu Wen**<sup>1†</sup> · [**Xinyi Zeng**](https://scholar.google.com/citations?user=LKWJyYsAAAAJ&hl=zh-CN&oi=sra)<sup>1</sup> · **Yuanyuan Xu**<sup>1</sup> · [**Xi Wu**](https://scholar.google.com/citations?user=to1L2HwAAAAJ&hl=en)<sup>2</sup> · **Jiliu Zhou**<sup>1</sup> · [**Yan Wang**](https://scholar.google.com/citations?user=f6FgQ_bXEb4C&hl=en)<sup>1*</sup>
 
-<sup>1</sup>Sichuan University · <sup>2</sup>Chengdu University of Information
+<sup>1</sup>Sichuan University · <sup>2</sup>Chengdu University of Information Technology
 
 <sup>†</sup>equal contribution, <sup>*</sup>corresponding authors
 
