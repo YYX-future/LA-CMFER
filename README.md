@@ -52,3 +52,5 @@ If this work is helpful for your research, please consider citing the following 
   year={2024}
 }
 ```
+## Contact
+If you have any questions or suggestions, feel free to email [Yuxiang Yang](winscuer@gmail.com).
