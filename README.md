@@ -9,17 +9,10 @@
 
 **MM 2024**
 
-<a href=(https://arxiv.org/pdf/2407.05688)"><img src='https://img.shields.io/badge/arXiv-COTR-red' alt='Paper PDF'></a>
-</div>
-
-![demo](./assets/video_nusc.gif)
-
-![legend](./assets/nusc_bar.png)
-
 ## 🚀 News
-- **2024.07**: [**arXiv**](https://arxiv.org/abs/2312.01919](https://arxiv.org/pdf/2407.05688) preprint released. 
-- **2024.07**: Code released.
-- **2024.07**: LA-CMFER is accepted by MM 2024.
+- **2024.07**  [**arXiv**](https://arxiv.org/pdf/2407.05688) preprint released. 
+- **2024.07**  Code released.
+- **2024.07**  LA-CMFER is accepted by MM 2024.
 
 ## 📝 Introduction
 Facial Expression Recognition (FER) holds significant importance in human-computer interactions. Existing cross-domain FER methods often transfer knowledge solely from a single labeled source domain to an unlabeled target domain, neglecting the comprehensive information across multiple sources. Nevertheless, cross-multidomain FER (CMFER) is very challenging for (i) the inherent inter-domain shifts across multiple domains and (ii) the intra-domain shifts stemming from the ambiguous expressions and low inter-class distinctions. In this paper, we propose a novel Learning with Alignments CMFER framework, named LA-CMFER, to handle both inter- and intra-domain shifts. Specifically, LA-CMFER is constructed with a global branch and a local branch to extract features from the full images and local subtle expressions, respectively. Based on this, LA-CMFER presents a dual-level inter-domain alignment method to force the model to prioritize hard-to-align samples in knowledge transfer at a sample level while gradually generating a well-clustered feature space with the guidance of class attributes at a cluster level, thus narrowing the inter-domain shifts. To address the intra-domain shifts, LA-CMFER introduces a multi-view intra-domain alignment method with a multi-view clustering consistency constraint where a prediction similarity matrix is built to pursue consistency between the global and local views, thus refining pseudo labels and eliminating latent noise. Extensive experiments on six benchmark datasets have validated the superiority of our LA-CMFER.
@@ -35,24 +28,9 @@ Overview of our proposed LA-CDFER framework with a dual-level inter-domain align
 
 #### Installation and Data Preparation
 
-Step 1: In order to infer your results, you should store the dataset according to the path described in the txt file in `./data/label_multi`
+Step 1: In order to infer your results, you should store the dataset according to the path described in the txt file in `./data`
 
-The prepared file format is as follows:
-
-```
-./data
-	./CK
-	./AffectNet
-	./FER2013
-	./JAFFE
-	./RAF-DB
-	./Oulu_CASIA
-
-```
-
-Step 2:  run `inference.py`.
-
-```
+Step 2:  run `train.py`.
 
 ## 🙏 Acknowledgement
 
