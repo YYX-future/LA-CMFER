@@ -20,8 +20,6 @@ Facial Expression Recognition (FER) holds significant importance in human-comput
 ## 💡 Method
 
 ![overview](./assets/overview.png)
-Overview of our proposed LA-CDFER framework with a dual-level inter-domain alignment and a multi-view intra-domain alignment. Our framework receives samples with labels from |S_n | sources and tries to classify the target samples in D^T.
-
 
 
 ## 🔧 Get Started
