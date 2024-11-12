@@ -45,10 +45,11 @@ This project is not possible without multiple great open-sourced code bases. We 
 If this work is helpful for your research, please consider citing the following BibTeX entry.
 
 ```
-@article{yang2024learning,
+@inproceedings{yang2024learning,
   title={Learning with Alignments: Tackling the Inter-and Intra-domain Shifts for Cross-multidomain Facial Expression Recognition},
   author={Yang, Yuxiang and Wen, Lu and Zeng, Xinyi and Xu, Yuanyuan and Wu, Xi and Zhou, Jiliu and Wang, Yan},
-  journal={arXiv preprint arXiv:2407.05688},
+  booktitle={Proceedings of the 32nd ACM International Conference on Multimedia},
+  pages={4236--4245},
   year={2024}
 }
 ```
